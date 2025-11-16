@@ -1,0 +1,39 @@
+import random
+def get_computer_choice():
+    vars = ["Камень","Ножницы","Бумага"]
+    return random.choice(vars)
+
+def determine_winner(player_choice, computer_choice):
+        if(player_choice == computer_choice):
+            return "Ничья"
+        elif((player_choice == "Камень" and computer_choice == "Ножницы") or (player_choice == "Бумага" and computer_choice == "Камень") or player_choice == "Ножницы" and computer_choice == "Бумага"):
+            return "Игрок"
+        else:
+            return "Компьютер"
+def main():
+    print("Добро пожаловать в игру <<Камень,Ножницы,Бумага>>!")
+    print("Правила игры: В игре «камень, ножницы, бумага» двое игроков одновременно показывают один из трёх жестов: камень, ножницы или бумагу. ")
+    print("Победитель определяется : Камень бьет ножницы. ""Ножницы бьют бумагу. ""Бумага бьет камень.")
+    print("Если игроки показали одинаковые фигуры, объявляется ничья, и раунд переигрывается.")
+    print("Игра продолжается пока один из игроков не получит 3 очка")
+    player_score = 0
+    computer_score = 0
+    while(player_score != 3 and computer_score != 3):
+        player_choice = input("Введите свой выбор(Камень, Ножницы, Бумага): ")
+        computer_choice = get_computer_choice()
+        print(f"Выбор компьютера: {computer_choice}")
+        winner = determine_winner(player_choice, computer_choice)
+        if(winner == "Игрок"):
+            print("Вы выйграли этот раунд")
+            player_score += 1
+        elif(winner == "Компьютер"):
+            print("Компьютер выйграл этот раунд")
+            computer_score += 1
+        else:
+            print("Ничья")
+        print(f"Текущий счет: {player_score} - {computer_score}")
+    if(player_score == 3):
+        print(f"Вы победили! Со счетом: {player_score} - {computer_score}")
+    elif(computer_score == 3):
+        print(f"Компьютер победил! Со счетом: {player_score} - {computer_score}")
+main()
